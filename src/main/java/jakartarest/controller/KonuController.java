@@ -1,9 +1,8 @@
 package jakartarest.controller;
+
 import java.util.ArrayList;
-
-import com.bilgeadam.postgresqljdbc.model.Ogretmen;
-import com.bilgeadam.postgresqljdbc.repository.OgretmenRepository;
-
+import com.bilgeadam.postgresqljdbc.model.Konu;
+import com.bilgeadam.postgresqljdbc.repository.KonuRepository;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -17,20 +16,20 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-@Path(value = "/ogretmen")
-public class OgretmenController {
-private static OgretmenRepository ogretmen_repo=new OgretmenRepository();
+@Path(value = "/konu")
+public class KonuController {
+	private static KonuRepository konu_repo=new KonuRepository();
 	@GET
 	@Path(value = "/get")
 	public String print() {
 		return "GET. ";
 	}
 	@GET
-	@Path(value = "/listall")
+	@Path(value = "/getall")
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public Response getall() {
 		try { 
-			ArrayList<Ogretmen> result =ogretmen_repo.getAll();
+			ArrayList<Konu> result =konu_repo.getAll();
 			System.err.println(result);
 			return Response.ok().entity(result).build();		
 			} catch (Exception e) {
@@ -41,10 +40,10 @@ private static OgretmenRepository ogretmen_repo=new OgretmenRepository();
 	@POST
 	@Path(value = "/save")
 	@Consumes(value=MediaType.APPLICATION_JSON)
-	public Response save(Ogretmen ogretmen)
+	public Response save(Konu konu)
 	{
 		try {
-			if (ogretmen_repo.save(ogretmen)) {
+			if (konu_repo.save(konu)) {
 				return Response.status(Status.CREATED).entity("KAYIT OLUNDU").build();
 			}
 			else
@@ -61,10 +60,10 @@ private static OgretmenRepository ogretmen_repo=new OgretmenRepository();
 	@Produces(value = MediaType.TEXT_PLAIN)
 	public Response deletebyid(@PathParam(value = "id") long id)
 	{
-		// localhost:8080/jakartarest/ogretmen/deletebyid/1
+		// localhost:8080/JavaEx/konu/deletebyid/1
 		try
 		{
-			if (ogretmen_repo.deleteByID(id))
+			if (konu_repo.deleteByID(id))
 			{
 				return Response.ok().entity("Başarı ile silindi").build();
 			}
@@ -83,10 +82,10 @@ private static OgretmenRepository ogretmen_repo=new OgretmenRepository();
 	@Produces(value = MediaType.APPLICATION_JSON)
 	public Response getbyidpath(@PathParam(value = "id") long id)
 	{
-		// localhost:8080/jakartarest/ogretmen/getbyid/1
+		// localhost:8080/JavaEx/konu/getbyid/1
 		try
 		{
-			Ogretmen result = ogretmen_repo.getByID(id);
+			Konu result = konu_repo.getByID(id);
 			if (result == null)
 			{
 				return Response.status(Status.NOT_FOUND).entity("Kayıt bulunamadı").build();
@@ -110,7 +109,7 @@ private static OgretmenRepository ogretmen_repo=new OgretmenRepository();
 		// 2-/ ile verilen path parameter
 		// 3- header
 		try { 
-			 Ogretmen  result =ogretmen_repo.getByID(id);
+			 Konu  result =konu_repo.getByID(id);
 			return Response.ok().entity(result).build();		
 			} catch (Exception e) {
 			return Response.serverError().entity("Bir hata olustu").build();
@@ -123,10 +122,10 @@ private static OgretmenRepository ogretmen_repo=new OgretmenRepository();
 
 	public Response getbyidheader(@HeaderParam(value = "id") long id)
 	{
-		// localhost:8080/JakartaEx/ogretmen/getbyidheader
+		// localhost:8080/JakartaEx/konu/getbyidheader
 		try
 		{
-			Ogretmen result = ogretmen_repo.getByID(id);
+			Konu result = konu_repo.getByID(id);
 			if (result == null)
 			{
 				return Response.status(Status.NOT_FOUND).entity("Kayıt bulunamadı").build();
