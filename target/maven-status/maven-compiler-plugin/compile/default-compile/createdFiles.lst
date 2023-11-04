@@ -1,0 +1,12 @@
+jakartarest\controller\OgretmenController.class
+jakartarest\model\Ogretmen.class
+jakartarest\Constants.class
+jakartarest\model\Ogrenci.class
+com\bilgeadam\postgresqljdbc\repository\DersRepository.class
+jakartarest\Application.class
+jakartarest\model\DersDTO.class
+com\bilgeadam\postgresqljdbc\repository\OgrenciRepository.class
+com\bilgeadam\postgresqljdbc\repository\OgretmenRepository.class
+jakartarest\model\Ders.class
+jakartarest\model\Konu.class
+com\bilgeadam\postgresqljdbc\repository\KonuRepository.class
